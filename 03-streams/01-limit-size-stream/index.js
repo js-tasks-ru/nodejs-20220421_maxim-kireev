@@ -1,5 +1,6 @@
 const LimitSizeStream = require('./LimitSizeStream');
 const fs = require('fs');
+const { chunk } = require('lodash');
 
 const limitedStream = new LimitSizeStream({limit: 8, encoding: 'utf-8'}); // 8 байт
 const outStream = fs.createWriteStream('out.txt');
@@ -11,3 +12,4 @@ limitedStream.write('hello'); // 'hello' - это 5 байт, поэтому э�
 setTimeout(() => {
   limitedStream.write('world'); // ошибка LimitExceeded! в файле осталось только hello
 }, 10);
+
