@@ -18,9 +18,10 @@ router.get('/subscribe', async (ctx, next) => {
 });
 
 router.post('/publish', async (ctx, next) => {
-    let message = ctx.request.body.message;
-    if(message === '') ctx.throw(400)
-    else
+  let message = ctx.request.body.message;
+    if(!message) {
+    ctx.throw(400, 'Empty message');
+    }
     resolves.forEach(res => res(ctx.request.body.message));
     resolves = [];
     ctx.body = 'done'
