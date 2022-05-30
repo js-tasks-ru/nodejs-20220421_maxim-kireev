@@ -12,9 +12,9 @@ describe('koajs/chat-app', () => {
     });
 
     after((done) => {
-      server.close(done);
+      server.close();
+      done();
     });
-
     describe('POST /publish', () => {
       it('сообщение должно быть доставлено всем подписчикам', async () => {
         const message = 'text';
